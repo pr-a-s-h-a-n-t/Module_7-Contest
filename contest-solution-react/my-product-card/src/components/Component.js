@@ -6,7 +6,7 @@ import './ProductCart.css';
 
 function Component() {
 
-    const [fake,setFake]=useState([]);
+    const [fake, setFake]=useState([]);
     console.log(fake);
     useEffect(()=>{
         fakestore();
@@ -15,36 +15,28 @@ function Component() {
 
     const fakestore = async()=>{
         const response=await fetch("https://acciojob-module-7-sept-2022-default-rtdb.asia-southeast1.firebasedatabase.app/products.json");
-        // console.log(response);
+        console.log(response);
         const jsonData=await response.json();
-        // console.log(jsonData);
+        console.log(jsonData);
         setFake(jsonData);
     }
-    fakestore();
+    // fakestore();
     return  (
-        // name of jsx start with small letter.
-        //  name of react component with capital letter
-         <div>
+         
+          <>
+          <div>
              
-             {/* <ProductCart /> */}
+             
+             <h3>Products</h3>
 
              <div className="wrapper">
-               <h3>Products</h3>
-
-                {/* {
-                    fake.map((values)=>{
-                        return(
-                            <></>
-                        )
-                    })
-                } */}
-             
-
-
-             
-                        <div className="cart-item">
-                            <div id='img'>Image</div>
-                            <div id='discription'>Discription</div>
+                
+               {fake.map((value)=>{
+                  return(
+                    <>
+                           <div className="cart-item">
+                            <div id='img'> <img src={value.productImage} alt=''></img> </div>
+                            <div id='discription'>{value.productName}</div>
                             <div >
                                 <span id='rating'>
              
@@ -65,17 +57,33 @@ function Component() {
              
                                 
                                  </span>
-                                <span id='old-price'>59999/-</span>
-                                <span id='new-price'>47999/-</span>
+                                <span id='old-price'>{value.oldPrice}</span>
+                                <span id='new-price'>{value.newPrice}</span>
                             </div>
                             <button>ADD TO CART</button>
-                        </div>
+                           </div>
+                    
+                    </>
+                  )
+
+
+               })}
+
+             
+             
+
+
+             
+                        
                          
 
              </div>
               
 
          </div>
+          
+          
+          </>
          
     );
 }
